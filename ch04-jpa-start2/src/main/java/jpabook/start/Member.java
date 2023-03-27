@@ -3,10 +3,6 @@ package jpabook.start;
 import javax.persistence.*;  //**
 import java.util.Date;
 
-/**
- * User: HolyEyE
- * Date: 13. 5. 24. Time: 오후 7:43
- */
 @Entity
 @Table(name="MEMBER", uniqueConstraints = {@UniqueConstraint( //추가 //**
         name = "NAME_AGE_UNIQUE",
@@ -14,7 +10,7 @@ import java.util.Date;
 public class Member {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID")			// @GeneratedValue strategy IDENTITY, SEQUENCE, TABLE 방식 등
     private String id;
 
     @Column(name = "NAME", nullable = false, length = 10) //추가 //**
@@ -24,16 +20,16 @@ public class Member {
     private Integer age;
 
     //=== 추가
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)		// Java Enum 사용을 위한 Annotation
     private RoleType roleType;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)	// Java의 날짜 타입
     private Date lastModifiedDate;
 
-    @Lob
+    @Lob								// CLob
     private String description;
 
     @Transient
